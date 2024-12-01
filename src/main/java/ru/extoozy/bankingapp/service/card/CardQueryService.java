@@ -4,4 +4,5 @@ import ru.extoozy.bankingapp.domain.model.Card;
 import ru.extoozy.bankingapp.service.QueryService;
 
 public interface CardQueryService extends QueryService<Card> {
+    boolean existsByNumberAndDate(String number, String date);
 }

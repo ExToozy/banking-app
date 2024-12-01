@@ -6,4 +6,6 @@ import ru.extoozy.bankingapp.domain.model.Transaction;
 
 @Mapper(componentModel = "spring")
 public interface TransactionMapper extends Mappable<Transaction, TransactionDto> {
+
+    
 }

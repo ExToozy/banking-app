@@ -6,4 +6,5 @@ import ru.extoozy.bankingapp.domain.model.Client;
 import java.util.UUID;
 
 public interface ClientRepository extends JpaRepository<Client, UUID> {
+    boolean existsByUsername(String username);
 }

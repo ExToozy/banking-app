@@ -7,4 +7,5 @@ import ru.extoozy.bankingapp.service.QueryService;
 public interface ClientService extends QueryService<Client>, CommandService<Client> {
 
 
+    boolean existsByUsername(String username);
 }
