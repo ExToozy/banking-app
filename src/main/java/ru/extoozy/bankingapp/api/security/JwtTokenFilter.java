@@ -29,18 +29,18 @@ public class JwtTokenFilter extends GenericFilterBean {
         try {
             String token = resolve((HttpServletRequest) request);
             if (isInvalidToken(token)) {
+                chain.doFilter(request, response);
                 return;
             }
-            Authentication authentication = getAuthentication(token);
-            if (authentication == null) {
+            Authentication auth = getAuthentication(token);
+            if (auth == null) {
+                chain.doFilter(request, response);
                 return;
             }
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-
+            SecurityContextHolder.getContext().setAuthentication(auth);
         } catch (Exception ignored) {
-
         }
+        chain.doFilter(request, response);
     }
 
     private String resolve(HttpServletRequest request) {
