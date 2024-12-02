@@ -1,6 +1,7 @@
 package ru.extoozy.bankingapp.api.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,18 +29,21 @@ public class ClientController {
     private final AccountMapper accountMapper;
 
     @GetMapping("/{id}")
+    @PreAuthorize("@securityServiceImpl.canAccessClient(#id)")
     public ClientDto getById(@PathVariable UUID id) {
         Client client = clientService.getById(id);
         return clientMapper.toDto(client);
     }
 
     @GetMapping("/{id}/cards")
+    @PreAuthorize("@securityServiceImpl.canAccessClient(#id)")
     public List<CardDto> getCardsByClientId(@PathVariable UUID id) {
         Client client = clientService.getById(id);
         return cardMapper.toDto(client.getCards());
     }
 
     @GetMapping("/{id}/account")
+    @PreAuthorize("@securityServiceImpl.canAccessClient(#id)")
     public AccountDto getAccountByClientId(@PathVariable UUID id) {
         Client client = clientService.getById(id);
         return accountMapper.toDto(client.getAccount());

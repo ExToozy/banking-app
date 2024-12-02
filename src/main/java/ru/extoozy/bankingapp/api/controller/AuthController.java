@@ -23,15 +23,15 @@ public class AuthController {
 
     private final ClientMapper clientMapper;
 
+    @PostMapping("/login")
+    public LoginResponseDto login(@RequestBody @Validated LoginRequestDto loginRequest) {
+        return authService.login(loginRequest);
+    }
+
     @PostMapping("/register")
     public void register(@RequestBody @Validated(OnCreate.class) ClientDto dto) {
         Client client = clientMapper.toEntity(dto);
         authService.register(client);
     }
 
-
-    @PostMapping("/register")
-    public LoginResponseDto register(@RequestBody @Validated LoginRequestDto dto) {
-        return authService.login(dto);
-    }
 }
