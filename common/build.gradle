@@ -1,0 +1,11 @@
+dependencies {
+    // Spring
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Json
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.2'
+}
