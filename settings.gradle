@@ -1,4 +1,5 @@
 rootProject.name = 'banking-app'
 include 'core-service'
 include 'common'
+include 'event-handler'
 
