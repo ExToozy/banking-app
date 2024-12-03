@@ -15,6 +15,42 @@ volumes:
     driver: local
 
 services:
+  backend:
+    build:
+      dockerfile: core.Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - banking
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_ACCESS_DURATION=${JWT_ACCESS_DURATION}
+      - JWT_REFRESH_DURATION=${JWT_REFRESH_DURATION}
+      - HOST=postgres:5432
+    depends_on:
+      - postgres
+
+  event-handler:
+    build:
+      dockerfile: event-handler.Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - KAFKA_BROKER_ID=${KAFKA_BROKER_ID}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - HOST=postgres:5432
+    networks:
+      - banking
+    depends_on:
+      - kafka
+      - postgres
+  
   postgres:
     image: 'postgres:15.1-alpine'
     ports:
