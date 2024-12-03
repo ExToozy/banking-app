@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
-@SpringBootApplication(scanBasePackages = "ru.extoozy")
-@EntityScan(basePackages = "ru.extoozy")
-@EnableJpaRepositories(basePackages = "ru.extoozy")
+@SpringBootApplication(scanBasePackages = "ru.extoozy.eventhandler")
+@EnableJpaRepositories(basePackages = "ru.extoozy.common")
+@EntityScan(basePackages = "ru.extoozy.common")
 @EnableTransactionManagement
 public class EventHandlerApplication {
     public static void main(String[] args) {

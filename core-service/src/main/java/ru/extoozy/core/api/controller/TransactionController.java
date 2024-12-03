@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.extoozy.core.api.dto.OnCreate;
+import ru.extoozy.common.domain.model.Transaction;
 import ru.extoozy.core.api.dto.TransactionDto;
+import ru.extoozy.core.api.dto.group.OnCreate;
 import ru.extoozy.core.api.mapper.TransactionMapper;
 import ru.extoozy.core.service.card.CardService;
 import ru.extoozy.core.service.transaction.TransactionService;
-import ru.extoozy.common.domain.model.Transaction;
 
 import java.util.UUID;
 
