@@ -18,16 +18,13 @@ public class TransactionCreateEventHandler implements EventHandler {
     private final TransactionService transactionService;
     private final ObjectMapper mapper;
 
+
     @Override
     @Transactional
-    public void handle(JsonNode object, Acknowledgment acknowledgment) {
-        try {
-            TransactionCreateEvent event = mapper.treeToValue(object, TransactionCreateEvent.class);
-            Transaction transaction = mapper.readValue((String) event.getPayload(), Transaction.class);
-            transactionService.create(transaction);
-            acknowledgment.acknowledge();
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+    public void handle(JsonNode object, Acknowledgment acknowledgment) throws JsonProcessingException {
+        TransactionCreateEvent event = mapper.treeToValue(object, TransactionCreateEvent.class);
+        Transaction transaction = mapper.readValue((String) event.getPayload(), Transaction.class);
+        transactionService.create(transaction);
+        acknowledgment.acknowledge();
     }
 }

@@ -20,14 +20,10 @@ public class AccountCreateEventHandler implements EventHandler {
 
     @Override
     @Transactional
-    public void handle(JsonNode object, Acknowledgment acknowledgment) {
-        try {
-            AccountCreateEvent event = mapper.treeToValue(object, AccountCreateEvent.class);
-            Account account = mapper.readValue((String) event.getPayload(), Account.class);
-            accountService.create(account);
-            acknowledgment.acknowledge();
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+    public void handle(JsonNode object, Acknowledgment acknowledgment) throws JsonProcessingException {
+        AccountCreateEvent event = mapper.treeToValue(object, AccountCreateEvent.class);
+        Account account = mapper.readValue((String) event.getPayload(), Account.class);
+        accountService.create(account);
+        acknowledgment.acknowledge();
     }
 }

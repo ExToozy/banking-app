@@ -20,14 +20,10 @@ public class ClientCreateEventHandler implements EventHandler {
 
     @Override
     @Transactional
-    public void handle(JsonNode object, Acknowledgment acknowledgment) {
-        try {
-            CardCreateEvent event = mapper.treeToValue(object, CardCreateEvent.class);
-            Client client = mapper.readValue((String) event.getPayload(), Client.class);
-            clientService.create(client);
-            acknowledgment.acknowledge();
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+    public void handle(JsonNode object, Acknowledgment acknowledgment) throws JsonProcessingException {
+        CardCreateEvent event = mapper.treeToValue(object, CardCreateEvent.class);
+        Client client = mapper.readValue((String) event.getPayload(), Client.class);
+        clientService.create(client);
+        acknowledgment.acknowledge();
     }
 }
