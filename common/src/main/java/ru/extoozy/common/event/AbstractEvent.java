@@ -1,5 +1,6 @@
 package ru.extoozy.common.event;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,6 +16,7 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import ru.extoozy.common.util.LocalDateTimeDeserializer;
 import ru.extoozy.common.util.ObjectConverter;
 
 import java.time.LocalDateTime;
@@ -39,6 +41,7 @@ public abstract class AbstractEvent implements Event {
     private EventType type;
 
     @CreationTimestamp
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime timestamp;
 
     @JdbcTypeCode(SqlTypes.JSON)

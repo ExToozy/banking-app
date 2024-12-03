@@ -1,4 +1,4 @@
-package ru.extoozy.eventhandler.util;
+package ru.extoozy.common.util;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
