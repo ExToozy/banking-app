@@ -22,17 +22,25 @@ public class ClientDto {
     @Null(message = "Id must be null", groups = OnCreate.class)
     private UUID id;
 
-    @NotNull(message = "Name must not be null")
+    @NotNull(message = "Name must not be null", groups = {OnCreate.class, OnUpdate.class})
     @Length(min = 1, max = 255, message = "Name must be between {min} and {max}")
     private String name;
 
-    @Email(message = "Username must be a valid email")
-    @NotNull(message = "Username must not be null")
-    @Length(min = 1, max = 255, message = "Username must be between {min} and {max}")
+    @Email(message = "Username must be a valid email", groups = {OnCreate.class, OnUpdate.class})
+    @NotNull(message = "Username must not be null", groups = {OnCreate.class, OnUpdate.class})
+    @Length(
+            min = 1, max = 255,
+            message = "Username must be between {min} and {max}",
+            groups = {OnCreate.class, OnUpdate.class}
+    )
     private String username;
 
-    @NotNull(message = "Password must not be null")
-    @Length(min = 1, max = 255, message = "Name must be between {min} and {max}")
+    @NotNull(message = "Password must not be null", groups = {OnCreate.class, OnUpdate.class})
+    @Length(
+            min = 1, max = 255,
+            message = "Name must be between {min} and {max}",
+            groups = {OnCreate.class, OnUpdate.class}
+    )
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
