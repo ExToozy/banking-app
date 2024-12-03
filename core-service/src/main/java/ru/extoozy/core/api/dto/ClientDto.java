@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import ru.extoozy.core.api.dto.group.OnCreate;
+import ru.extoozy.core.api.dto.group.OnUpdate;
 
 import java.util.UUID;
 

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.extoozy.core.api.dto.group.OnCreate;
+import ru.extoozy.core.api.dto.group.OnUpdate;
 
 import java.math.BigDecimal;
 import java.util.UUID;

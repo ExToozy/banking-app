@@ -4,10 +4,15 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.groups.ConvertGroup;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.extoozy.core.api.dto.group.OnCreate;
+import ru.extoozy.core.api.dto.group.OnTransactionCardFrom;
+import ru.extoozy.core.api.dto.group.OnTransactionCardTo;
+import ru.extoozy.core.api.dto.group.OnUpdate;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -24,11 +29,13 @@ public class TransactionDto {
 
     @NotNull(message = "Sender card from must not be null", groups = OnCreate.class)
     @Null(message = "Sender card must be null", groups = {OnCreate.class, OnUpdate.class})
+    @ConvertGroup(from = OnCreate.class, to = OnTransactionCardFrom.class)
     @Valid
     private CardDto from;
 
     @NotNull(message = "Receiver card from must not be null", groups = OnCreate.class)
     @Null(message = "Receiver must be null", groups = OnUpdate.class)
+    @ConvertGroup(from = OnCreate.class, to = OnTransactionCardTo.class)
     @Valid
     private CardDto to;
 
